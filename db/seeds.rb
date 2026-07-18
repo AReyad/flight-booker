@@ -18,6 +18,8 @@ airports_ids = Airport.limit(4).ids
 
 airports_ids.each_with_index do |id, index|
   second_id = airports_ids[index + 1].nil? ? airports_ids[0] : airports_ids[index + 1]
-  Flight.find_or_create_by!({ arrival_airport_id: id, departure_airport_id: second_id, date: Date.today + (index + 2).days, duration: "#{index + 2} hours" })
-  Flight.find_or_create_by!({ arrival_airport_id: second_id, departure_airport_id: id, date: Date.today + (index + 2).days, duration: "#{index + 2} hours" })
+  4.times do |i|
+    Flight.find_or_create_by!({ arrival_airport_id: id, departure_airport_id: second_id, date: Date.today + i.days, duration: "#{i + 2} hours" })
+    Flight.find_or_create_by!({ arrival_airport_id: second_id, departure_airport_id: id, date: Date.today + i.days, duration: "#{i + 2} hours" })
+  end
 end

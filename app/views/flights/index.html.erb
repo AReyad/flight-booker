@@ -8,17 +8,23 @@
   <%= select_tag(:flight_date, options_for_select(@dates)) %>
   <%= form.label :passengers_count, "Passengers:" %>
   <%= select_tag(:passengers_count, options_for_select([1, 2, 3, 4])) %>
-  <%= form.submit "Search" %>
+  <%= form.submit "Search Flights" %>
 <% end %>
 
-<% p params %>
 <% if @flights.empty? && params[:flight_date] %>
   <p>No Flights Avaiable</p>
 <% else %>
-  <% @flights.each do |flight| %>
-    <p>Flight date: <%=  display_date(flight.date) %></p>
-    <p>Flight duration: <%=  flight.duration %></p>
-    <p>Flight arrival airport: <%=  flight.arrival_airport.name %></p>
-    <p>Flight departure airport: <%=   flight.departure_airport.name %></p>
-  <% end %>
+  <%= form_with url: "/bookings", method: :get do |form|%>
+    <% @flights.each_with_index do |flight, index| %>
+       <%= form.radio_button :flight, flight.id, required: true %>
+       <%= hidden_field_tag :passengers_count, params[:passengers_count] %>
+       <%= form.label "flight_#{flight.id}" do %>
+          <p>Flight date: <%=  display_date(flight.date) %></p>
+          <p>Flight duration: <%=  flight.duration %></p>
+          <p>Flight arrival airport: <%=  flight.arrival_airport.name %></p>
+          <p>Flight departure airport: <%=   flight.departure_airport.name %></p>
+          <% end %>
+    <% end %>
+    <%= form.submit "Select Flight" %>
+  <%end%>
 <% end %>
