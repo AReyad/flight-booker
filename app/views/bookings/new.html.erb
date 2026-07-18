@@ -1,0 +1,20 @@
+<div>
+  <%= render "/flight" %>
+</div>
+<%= form_for @booking do |f| %>
+  <%= f.hidden_field :flight_id, value: params[:flight] %>
+  <%= f.fields_for :passengers do |passenger| %>
+      <div class="passenger">
+      <p>Passenger information:</p>
+        <div>
+          <%= passenger.label :name %>
+          <%= passenger.text_field :name, required: true %>
+        </div>
+        <div>
+          <%= passenger.label :email %>
+          <%= passenger.email_field :email, required: true %>
+        </div>
+      </div>
+    <% end %>
+  <%= f.submit value: "Book Tickets" %>
+<% end %>

@@ -1,0 +1,6 @@
+<div><%= render "/flight" %></div>
+<% @passengers.each_with_index do |passenger, index| %>
+  <div>
+    <p><%= passenger.name %></p>
+  </div>
+<% end %>

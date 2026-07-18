@@ -8,3 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ .passenger {
+  margin-bottom: 1rem;
+ }
+
+ .passenger > p {
+  margin-bottom: 0;
+ }
