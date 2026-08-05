@@ -1,8 +1,9 @@
 <div>
   <%= render "/flight" %>
 </div>
-<%= form_for @booking do |f| %>
+<%= form_for @booking, data: { controller: "booking", booking_target: "form", booking_index_value: params[:passengers_count] } do |f| %>
   <%= f.hidden_field :flight_id, value: params[:flight] %>
+  <template id="passengers-template" data-booking-target="template">
   <%= f.fields_for :passengers do |passenger| %>
       <div class="passenger">
       <p>Passenger information:</p>
@@ -16,5 +17,7 @@
         </div>
       </div>
     <% end %>
+  </template>
+    <button data-action="booking#insert:prevent" data-booking-target="button">New passenger</button>
   <%= f.submit value: "Book Tickets" %>
 <% end %>
