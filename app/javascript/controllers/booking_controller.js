@@ -31,7 +31,7 @@ export default class extends Controller {
   }
 
   delete(event) {
-    if(this.indexValue > 1){
+    if(this.formTarget.querySelectorAll('.passenger').length > 1){
       const node = event.target.closest('.passenger')
       this.formTarget.removeChild(node)
       this.indexValue--
