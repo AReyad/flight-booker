@@ -9,10 +9,9 @@ export default class extends Controller {
   }
 
   insert() {
-    const form = document.querySelector('.new_booking')
     const clone = this.templateTarget.content.firstElementChild.cloneNode(true)
     this.setFieldsAttributes(clone)
-    form.appendChild(clone)
+    this.formTarget.appendChild(clone)
     this.indexValue++
   }
 
@@ -29,5 +28,15 @@ export default class extends Controller {
       const attribute_value = element.getAttribute(attr)
       element.setAttribute(attr, attribute_value.replace(/\d/g, this.indexValue))
     })
+  }
+
+  delete(event) {
+    if(this.indexValue > 1){
+      const node = event.target.closest('.passenger')
+      this.formTarget.removeChild(node)
+      this.indexValue--
+    } else {
+     return
+    }
   }
 }

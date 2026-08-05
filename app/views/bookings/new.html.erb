@@ -15,6 +15,7 @@
           <%= passenger.label :email %>
           <%= passenger.email_field :email, required: true %>
         </div>
+        <button data-action="booking#delete:prevent">Delete</button>
       </div>
     <% end %>
   </template>
